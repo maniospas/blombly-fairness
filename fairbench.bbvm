@@ -1,0 +1,863 @@
+BEGIN _bb20
+BEGIN _bb21
+BUILTIN _bb23 ""
+str _bb25 value
+BUILTIN _bb27 " "
+str _bb29 name
+BUILTIN _bb30 ""
+add _bb28 _bb30 _bb29
+add _bb26 _bb28 _bb27
+add _bb24 _bb26 _bb25
+add _bb22 _bb24 _bb23
+return # _bb22
+END
+IS \str _bb21
+BEGIN _bb31
+return # value
+END
+IS \float _bb31
+BEGIN _bb32
+next other args
+get _bb34 other value
+lt _bb33 value _bb34
+return # _bb33
+END
+IS \lt _bb32
+BEGIN _bb35
+next other args
+get _bb37 other value
+gt _bb36 value _bb37
+return # _bb36
+END
+IS \gt _bb35
+END
+IS explainable _bb20
+final # explainable
+BEGIN _bb38
+vector preds preds
+vector labels labels
+vector sensitive sensitive
+len n_preds preds
+len n_labels labels
+len n_sensitive sensitive
+BEGIN _bb45
+BUILTIN _bb47 ""
+str _bb49 n_labels
+BUILTIN _bb51 " that is different from label length "
+str _bb53 n_preds
+BUILTIN _bb54 "Predictions have length "
+add _bb52 _bb54 _bb53
+add _bb50 _bb52 _bb51
+add _bb48 _bb50 _bb49
+add _bb46 _bb48 _bb47
+fail # _bb46
+END
+neq _bb55 n_preds n_labels
+if # _bb55 _bb45
+BEGIN _bb56
+BUILTIN _bb58 ""
+str _bb60 n_sensitive
+BUILTIN _bb62 " that is different from sensitive length "
+str _bb64 n_preds
+BUILTIN _bb65 "Predictions and labels have length "
+add _bb63 _bb65 _bb64
+add _bb61 _bb63 _bb62
+add _bb59 _bb61 _bb60
+add _bb57 _bb59 _bb58
+fail # _bb57
+END
+neq _bb66 n_preds n_sensitive
+if # _bb66 _bb56
+END
+IS prepare _bb38
+final # prepare
+BEGIN _bb67
+next sorted_args args
+BUILTIN _bb70 I1
+len _bb71 sorted_args
+sub _bb69 _bb71 _bb70
+range _bbmacro0 _bb69
+next _bb72 _bbmacro0
+AS i _bb72
+exists _bb73 i
+BEGIN _bb74
+len _bb76 sorted_args
+BUILTIN _bb78 I1
+add _bb77 i _bb78
+range _bbmacro1 _bb77 _bb76
+next _bb79 _bbmacro1
+AS j _bb79
+exists _bb80 j
+BEGIN _bb81
+BEGIN _bb82
+at _bb83 sorted_args i
+IS temp _bb83
+at _bb84 sorted_args j
+put # sorted_args i _bb84
+put # sorted_args j temp
+END
+at _bb86 sorted_args j
+at _bb87 sorted_args i
+gt _bb85 _bb87 _bb86
+if # _bb85 _bb82
+next _bb79 _bbmacro1
+AS j _bb79
+exists _bb80 j
+END
+while # _bb80 _bb81
+next _bb72 _bbmacro0
+AS i _bb72
+exists _bb73 i
+END
+while # _bb73 _bb74
+return # sorted_args
+END
+IS sort _bb67
+final # sort
+BEGIN _bb90
+IS prepare prepare
+final # prepare
+IS explainable explainable
+final # explainable
+return # this
+END
+new metrics _bb90
+final # metrics
+BEGIN _bb91
+inline _bb92 prepare
+BUILTIN _bb96 I1
+sub _bb95 _bb96 labels
+BUILTIN _bb98 I1
+sub _bb97 _bb98 preds
+mul _bb94 _bb97 _bb95
+mul _bb99 preds labels
+add correct _bb99 _bb94
+mul _bb100 correct sensitive
+sum correct _bb100
+sum samples sensitive
+BEGIN _bb105
+inline _bb106 explainable
+BUILTIN name "acc"
+BUILTIN desc "accuracy"
+BEGIN _bb111
+BEGIN _bb112
+BUILTIN _bb113 I1
+return # _bb113
+END
+BEGIN _bb114
+div _bb115 correct samples
+return # _bb115
+END
+BUILTIN _bb117 I0
+eq _bb116 samples _bb117
+if # _bb116 _bb112 _bb114
+END
+try value _bb111
+IS correct correct
+IS samples samples
+return # this
+END
+new _bb103 _bb105
+return # _bb103
+END
+set # metrics acc _bb91
+BEGIN _bb118
+inline _bb119 prepare
+mul positives preds sensitive
+sum total_samples sensitive
+sum positive_count positives
+BEGIN _bb125
+inline _bb126 explainable
+BUILTIN name "pr"
+BUILTIN desc "positive rate"
+BEGIN _bb131
+BEGIN _bb132
+BUILTIN _bb133 I0
+return # _bb133
+END
+BEGIN _bb134
+div _bb135 positive_count total_samples
+return # _bb135
+END
+BUILTIN _bb137 I0
+eq _bb136 total_samples _bb137
+if # _bb136 _bb132 _bb134
+END
+try value _bb131
+IS positive_count positive_count
+IS total_samples total_samples
+return # this
+END
+new _bb123 _bb125
+return # _bb123
+END
+set # metrics pr _bb118
+BEGIN _bb138
+inline _bb139 prepare
+mul _bb141 preds labels
+mul true_positives _bb141 sensitive
+mul positives labels sensitive
+sum tp_sum true_positives
+sum pos_sum positives
+BEGIN _bb147
+inline _bb148 explainable
+BUILTIN name "tpr"
+BUILTIN desc "true positive rate"
+BEGIN _bb153
+BEGIN _bb154
+BUILTIN _bb155 I0
+return # _bb155
+END
+BEGIN _bb156
+div _bb157 tp_sum pos_sum
+return # _bb157
+END
+BUILTIN _bb159 I0
+eq _bb158 pos_sum _bb159
+if # _bb158 _bb154 _bb156
+END
+try value _bb153
+IS true_positives tp_sum
+IS positives pos_sum
+return # this
+END
+new _bb145 _bb147
+return # _bb145
+END
+set # metrics tpr _bb138
+BEGIN _bb160
+inline _bb161 prepare
+BUILTIN _bb165 I1
+sub _bb164 _bb165 labels
+BUILTIN _bb167 I1
+sub _bb166 _bb167 preds
+mul _bb163 _bb166 _bb164
+mul true_negatives _bb163 sensitive
+BUILTIN _bb170 I1
+sub _bb169 _bb170 labels
+mul negatives _bb169 sensitive
+sum tn_sum true_negatives
+sum neg_sum negatives
+BEGIN _bb175
+inline _bb176 explainable
+BUILTIN name "tnr"
+BUILTIN desc "true negative rate"
+BEGIN _bb181
+BEGIN _bb182
+BUILTIN _bb183 I0
+return # _bb183
+END
+BEGIN _bb184
+div _bb185 tn_sum neg_sum
+return # _bb185
+END
+BUILTIN _bb187 I0
+eq _bb186 neg_sum _bb187
+if # _bb186 _bb182 _bb184
+END
+try value _bb181
+IS true_negatives tn_sum
+IS negatives neg_sum
+return # this
+END
+new _bb173 _bb175
+return # _bb173
+END
+set # metrics tnr _bb160
+BEGIN _bb190
+IS explainable explainable
+final # explainable
+IS sort sort
+final # sort
+return # this
+END
+new reduce _bb190
+final # reduce
+BEGIN _bb191
+next args args
+BUILTIN _bb193 I0
+at _bb192 args _bb193
+IS best _bb192
+len _bb195 args
+BUILTIN _bb196 I1
+range _bbmacro2 _bb196 _bb195
+next _bb197 _bbmacro2
+AS i _bb197
+exists _bb198 i
+BEGIN _bb199
+BEGIN _bb200
+at _bb201 args i
+IS best _bb201
+END
+at _bb203 args i
+lt _bb202 _bb203 best
+if # _bb202 _bb200
+next _bb197 _bbmacro2
+AS i _bb197
+exists _bb198 i
+END
+while # _bb198 _bb199
+BEGIN _bb206
+inline _bb207 explainable
+get _bb209 best name
+BUILTIN _bb210 "min "
+add name _bb210 _bb209
+final # name
+get _bb212 best desc
+BUILTIN _bb213 "minimum of "
+add desc _bb213 _bb212
+final # desc
+float value best
+final # value
+return # this
+END
+new _bb204 _bb206
+return # _bb204
+END
+set # reduce min _bb191
+BEGIN _bb215
+next args args
+BUILTIN _bb217 I0
+at _bb216 args _bb217
+IS best _bb216
+len _bb219 args
+BUILTIN _bb220 I1
+range _bbmacro3 _bb220 _bb219
+next _bb221 _bbmacro3
+AS i _bb221
+exists _bb222 i
+BEGIN _bb223
+BEGIN _bb224
+at _bb225 args i
+IS best _bb225
+END
+at _bb227 args i
+gt _bb226 _bb227 best
+if # _bb226 _bb224
+next _bb221 _bbmacro3
+AS i _bb221
+exists _bb222 i
+END
+while # _bb222 _bb223
+BEGIN _bb230
+inline _bb231 explainable
+get _bb233 best name
+BUILTIN _bb234 "max "
+add name _bb234 _bb233
+final # name
+get _bb236 best desc
+BUILTIN _bb237 "maximum of "
+add desc _bb237 _bb236
+final # desc
+float value best
+final # value
+return # this
+END
+new _bb228 _bb230
+return # _bb228
+END
+set # reduce max _bb215
+BEGIN _bb239
+next args args
+len _bb241 args
+sum _bb242 args
+div mean _bb242 _bb241
+BUILTIN squares I0
+BUILTIN sums I0
+iter _bbmacro4 args
+next _bb246 _bbmacro4
+AS x _bb246
+exists _bb247 x
+BEGIN _bb248
+BUILTIN _bb250 I2
+sub _bb251 x mean
+pow _bb249 _bb251 _bb250
+add squares squares _bb249
+add sums sums x
+next _bb246 _bbmacro4
+AS x _bb246
+exists _bb247 x
+END
+while # _bb247 _bb248
+len _bb253 args
+div variance squares _bb253
+BEGIN _bb255
+list args variance
+END
+call std_dev _bb255 sqrt
+BEGIN _bb258
+inline _bb259 explainable
+BUILTIN _bb261 " std"
+get _bb262 x name
+add name _bb262 _bb261
+final # name
+BUILTIN _bb266 I0
+at _bb265 args _bb266
+get _bb264 _bb265 desc
+BUILTIN _bb267 "standard deviation of "
+add desc _bb267 _bb264
+final # desc
+IS value std_dev
+final # value
+return # this
+END
+new _bb256 _bb258
+return # _bb256
+END
+set # reduce std _bb239
+BEGIN _bb268
+next args args
+BEGIN _bb270
+list args args
+END
+call sorted_args _bb270 sort
+len n sorted_args
+BUILTIN cumulative_sum I0
+sum total_sum sorted_args
+range _bbmacro5 n
+next _bb276 _bbmacro5
+AS i _bb276
+exists _bb277 i
+BEGIN _bb278
+at _bb280 sorted_args i
+BUILTIN _bb282 I1
+add _bb281 i _bb282
+mul _bb279 _bb281 _bb280
+add cumulative_sum cumulative_sum _bb279
+next _bb276 _bbmacro5
+AS i _bb276
+exists _bb277 i
+END
+while # _bb277 _bb278
+BUILTIN _bb286 I1
+add _bb285 n _bb286
+div _bb284 _bb285 n
+mul _bb288 n total_sum
+BUILTIN _bb290 I2
+mul _bb289 _bb290 cumulative_sum
+div _bb287 _bb289 _bb288
+sub gini _bb287 _bb284
+BEGIN _bb293
+inline _bb294 explainable
+BUILTIN _bb296 " gini"
+BUILTIN _bb299 I0
+at _bb298 args _bb299
+get _bb297 _bb298 name
+add name _bb297 _bb296
+final # name
+BUILTIN _bb303 I0
+at _bb302 args _bb303
+get _bb301 _bb302 desc
+BUILTIN _bb304 "gini coefficient of "
+add desc _bb304 _bb301
+final # desc
+IS value gini
+final # value
+return # this
+END
+new _bb291 _bb293
+return # _bb291
+END
+set # reduce gini _bb268
+BEGIN _bb305
+next args args
+BEGIN _bb307
+list args args
+END
+call sorted_args _bb307 sort
+BUILTIN _bb313 I1
+len _bb314 args
+sub _bb312 _bb314 _bb313
+at _bb311 sorted_args _bb312
+float _bb310 _bb311
+BUILTIN _bb317 I0
+at _bb316 sorted_args _bb317
+float _bb315 _bb316
+div min_ratio _bb315 _bb310
+BEGIN _bb320
+inline _bb321 explainable
+BUILTIN _bb323 " minratio"
+BUILTIN _bb326 I0
+at _bb325 args _bb326
+get _bb324 _bb325 name
+add name _bb324 _bb323
+final # name
+BUILTIN _bb330 I0
+at _bb329 args _bb330
+get _bb328 _bb329 desc
+BUILTIN _bb331 "minimum ratio between "
+add desc _bb331 _bb328
+final # desc
+IS value min_ratio
+final # value
+return # this
+END
+new _bb318 _bb320
+return # _bb318
+END
+set # reduce minratio _bb305
+BEGIN _bb332
+next args args
+BEGIN _bb334
+list args args
+END
+call sorted_args _bb334 sort
+BUILTIN _bb339 I0
+at _bb338 sorted_args _bb339
+float _bb337 _bb338
+BUILTIN _bb343 I1
+len _bb344 args
+sub _bb342 _bb344 _bb343
+at _bb341 sorted_args _bb342
+float _bb340 _bb341
+sub max_difference _bb340 _bb337
+BEGIN _bb347
+inline _bb348 explainable
+BUILTIN _bb350 " maxdiff"
+BUILTIN _bb353 I0
+at _bb352 args _bb353
+get _bb351 _bb352 name
+add name _bb351 _bb350
+final # name
+BUILTIN _bb357 I0
+at _bb356 args _bb357
+get _bb355 _bb356 desc
+BUILTIN _bb358 "maximum difference between "
+add desc _bb358 _bb355
+final # desc
+IS value max_difference
+final # value
+return # this
+END
+new _bb345 _bb347
+return # _bb345
+END
+set # reduce maxdiff _bb332
+BEGIN _bb359
+BEGIN _bb360
+BUILTIN _bb362 " sensitive attributes"
+get _bb364 this sensitive
+len _bb365 _bb364
+str _bb366 _bb365
+BUILTIN _bb367 "A fork of "
+add _bb363 _bb367 _bb366
+add _bb361 _bb363 _bb362
+return # _bb361
+END
+IS \str _bb360
+BEGIN _bb368
+list ret
+get _bb370 this sensitive
+iter _bbmacro6 _bb370
+next _bb372 _bbmacro6
+AS sens _bb372
+exists _bb373 sens
+BEGIN _bb374
+BEGIN _bb376
+IS sensitive sens
+IS labels labels
+IS preds preds
+END
+call value _bb376 measure
+push # ret value
+next _bb372 _bbmacro6
+AS sens _bb372
+exists _bb373 sens
+END
+while # _bb373 _bb374
+BEGIN _bb378
+list args ret
+END
+call _bb377 _bb378 reduce
+return # _bb377
+END
+IS \call _bb368
+END
+IS fork _bb359
+final # fork
+BEGIN _bb379
+next value args
+float value value
+BUILTIN _bb382 I10
+mul _bb381 value _bb382
+int value _bb381
+BUILTIN ret ""
+range _bbmacro7 value
+next _bb386 _bbmacro7
+AS i _bb386
+exists _bb387 i
+BEGIN _bb388
+BUILTIN _bb390 "■"
+add ret ret _bb390
+next _bb386 _bbmacro7
+AS i _bb386
+exists _bb387 i
+END
+while # _bb387 _bb388
+return # ret
+END
+IS bar _bb379
+final # bar
+BEGIN _bb391
+next value args
+BEGIN _bb393
+BUILTIN size I20
+END
+default # _bb393
+str ret value
+len _bb397 ret
+range _bbmacro8 _bb397 size
+next _bb398 _bbmacro8
+AS i _bb398
+exists _bb399 i
+BEGIN _bb400
+BUILTIN _bb402 " "
+add ret ret _bb402
+next _bb398 _bbmacro8
+AS i _bb398
+exists _bb399 i
+END
+while # _bb399 _bb400
+return # ret
+END
+IS left _bb391
+final # left
+BEGIN _bb403
+next title args
+next body args
+BEGIN _bb405
+BUILTIN script ""
+END
+default # _bb405
+BUILTIN _bb408 "         </body>         </html>     "
+str _bb410 body
+BUILTIN _bb412 "</script>         </head>         <body>         "
+str _bb414 script
+str _bb415 _bb414
+BUILTIN _bb417 "</title>             <script>"
+str _bb419 title
+str _bb420 _bb419
+BUILTIN _bb421 "<!DOCTYPE html>         <html>         <head>             <title>"
+add _bb418 _bb421 _bb420
+add _bb416 _bb418 _bb417
+add _bb413 _bb416 _bb415
+add _bb411 _bb413 _bb412
+add _bb409 _bb411 _bb410
+add _bb407 _bb409 _bb408
+return # _bb407
+END
+IS html _bb403
+final # html
+BEGIN _bb422
+next name args
+BEGIN _bb425
+IS name name
+list contents
+BEGIN _bb427
+BUILTIN contents ""
+get _bb429 this contents
+iter _bbmacro9 _bb429
+next _bb431 _bbmacro9
+AS element _bb431
+exists _bb432 element
+BEGIN _bb433
+str _bb435 element
+add contents contents _bb435
+next _bb431 _bbmacro9
+AS element _bb431
+exists _bb432 element
+END
+while # _bb432 _bb433
+BUILTIN _bb437 ">"
+get _bb439 this name
+str _bb440 _bb439
+BUILTIN _bb442 "</"
+str _bb444 contents
+BUILTIN _bb446 ">"
+get _bb448 this name
+str _bb449 _bb448
+BUILTIN _bb450 "<"
+add _bb447 _bb450 _bb449
+add _bb445 _bb447 _bb446
+add _bb443 _bb445 _bb444
+add _bb441 _bb443 _bb442
+add _bb438 _bb441 _bb440
+add ret _bb438 _bb437
+print # ret
+return # ret
+END
+IS \str _bb427
+BEGIN _bb451
+next other args
+get _bb452 this contents
+push # _bb452 other
+return # this
+END
+IS \add _bb451
+return # this
+END
+new _bb423 _bb425
+return # _bb423
+END
+IS dom _bb422
+final # dom
+BEGIN _bb453
+get _bb454 metrics acc
+IS measure _bb454
+get _bb455 reduce min
+IS reduce _bb455
+END
+BEGIN _bb456
+get _bb457 metrics pr
+IS measure _bb457
+get _bb458 reduce minratio
+IS reduce _bb458
+END
+BEGIN _bb459
+get _bb460 metrics tpr
+IS measure _bb460
+get _bb461 reduce maxdiff
+IS reduce _bb461
+END
+BEGIN _bb462
+get _bb463 metrics tpr
+IS measure _bb463
+get _bb464 reduce maxdiff
+IS reduce _bb464
+END
+BEGIN _bb465
+get _bb466 metrics tnr
+IS measure _bb466
+get _bb467 reduce maxdiff
+IS reduce _bb467
+END
+list configs _bb453 _bb456 _bb459 _bb462 _bb465
+BUILTIN _bb470 I1
+BUILTIN _bb471 I0
+BUILTIN _bb472 I1
+BUILTIN _bb473 I0
+BUILTIN _bb474 I1
+BUILTIN _bb475 I0
+BUILTIN _bb476 I1
+BUILTIN _bb477 I0
+BUILTIN _bb478 I1
+BUILTIN _bb479 I0
+list _bb480 _bb470 _bb471 _bb472 _bb473 _bb474 _bb475 _bb476 _bb477 _bb478 _bb479
+vector preds _bb480
+BUILTIN _bb482 I1
+BUILTIN _bb483 I1
+BUILTIN _bb484 I0
+BUILTIN _bb485 I1
+BUILTIN _bb486 I0
+BUILTIN _bb487 I0
+BUILTIN _bb488 I0
+BUILTIN _bb489 I1
+BUILTIN _bb490 I1
+BUILTIN _bb491 I1
+list _bb492 _bb482 _bb483 _bb484 _bb485 _bb486 _bb487 _bb488 _bb489 _bb490 _bb491
+vector labels _bb492
+BUILTIN _bb494 I1
+BUILTIN _bb495 I1
+BUILTIN _bb496 I0
+BUILTIN _bb497 I0
+BUILTIN _bb498 I1
+BUILTIN _bb499 I0
+BUILTIN _bb500 I1
+BUILTIN _bb501 I1
+BUILTIN _bb502 I0
+BUILTIN _bb503 I0
+list _bb504 _bb494 _bb495 _bb496 _bb497 _bb498 _bb499 _bb500 _bb501 _bb502 _bb503
+vector men _bb504
+BUILTIN _bb506 I1
+sub women _bb506 men
+BEGIN _bb509
+inline _bb510 fork
+list sensitive men women
+return # this
+END
+new sensitive _bb509
+BEGIN _bb513
+BUILTIN _bb515 "table"
+list args _bb515
+END
+call result _bb513 dom
+iter _bbmacro10 configs
+next _bb517 _bbmacro10
+AS config _bb517
+exists _bb518 config
+BEGIN _bb519
+BEGIN _bb521
+inline _bb522 config
+IS preds preds
+IS labels labels
+END
+call value _bb521 sensitive
+BUILTIN _bb524 ""
+BEGIN _bb527
+list args value
+END
+call _bb526 _bb527 bar
+str _bb529 _bb526
+BUILTIN _bb531 " | "
+BEGIN _bb534
+list args value
+END
+call _bb533 _bb534 left
+str _bb536 _bb533
+BUILTIN _bb537 ""
+add _bb532 _bb537 _bb536
+add _bb530 _bb532 _bb531
+add _bb525 _bb530 _bb529
+add _bb523 _bb525 _bb524
+print # _bb523
+BEGIN _bb539
+BUILTIN _bb541 "tr"
+list args _bb541
+END
+call row _bb539 dom
+get _bb544 value name
+str _bb543 _bb544
+BEGIN _bb546
+BUILTIN _bb548 "td"
+list args _bb548
+END
+call _bb545 _bb546 dom
+add _bb542 _bb545 _bb543
+add row row _bb542
+float _bb550 value
+BEGIN _bb552
+BUILTIN _bb554 "td"
+list args _bb554
+END
+call _bb551 _bb552 dom
+add _bb549 _bb551 _bb550
+add row row _bb549
+add result result row
+next _bb517 _bbmacro10
+AS config _bb517
+exists _bb518 config
+END
+while # _bb518 _bb519
+BUILTIN _bb555 I5000
+server routes _bb555
+BEGIN _bb557
+BUILTIN _bb558 "Up and running"
+return # _bb558
+END
+BUILTIN _bb559 "/test"
+put # routes _bb559 _bb557
+BEGIN _bb560
+BEGIN _bb562
+BUILTIN _bb563 "Title"
+list args _bb563 result
+END
+call _bb561 _bb562 html
+return # _bb561
+END
+BUILTIN _bb565 "/results"
+put # routes _bb565 _bb560
+BUILTIN _bb566 Btrue
+BEGIN _bb567
+BUILTIN _bb566 Btrue
+END
+while # _bb566 _bb567
