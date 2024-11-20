@@ -1,863 +1,954 @@
 BEGIN _bb20
-BEGIN _bb21
-BUILTIN _bb23 ""
-str _bb25 value
-BUILTIN _bb27 " "
-str _bb29 name
-BUILTIN _bb30 ""
-add _bb28 _bb30 _bb29
-add _bb26 _bb28 _bb27
-add _bb24 _bb26 _bb25
-add _bb22 _bb24 _bb23
-return # _bb22
+next title args
+next body args
+BEGIN _bb22
+BUILTIN script ""
 END
-IS \str _bb21
-BEGIN _bb31
+default # _bb22
+BEGIN _bb25
+BUILTIN src ""
+END
+default # _bb25
+BEGIN _bb28
+BUILTIN stylesheet ""
+END
+default # _bb28
+BUILTIN _bb31 "         </body>         </html>     "
+str _bb33 body
+BUILTIN _bb35 "</script>             "
+str _bb37 script
+str _bb38 _bb37
+BUILTIN _bb40 "'>"
+str _bb42 src
+str _bb43 _bb42
+BUILTIN _bb45 "' rel='stylesheet'>         </head>         <body>             <script src='"
+str _bb47 stylesheet
+BUILTIN _bb49 "</title>             <link href='"
+str _bb51 title
+str _bb52 _bb51
+BUILTIN _bb53 "<!DOCTYPE html>         <html>         <head>             <title>"
+add _bb50 _bb53 _bb52
+add _bb48 _bb50 _bb49
+add _bb46 _bb48 _bb47
+add _bb44 _bb46 _bb45
+add _bb41 _bb44 _bb43
+add _bb39 _bb41 _bb40
+add _bb36 _bb39 _bb38
+add _bb34 _bb36 _bb35
+add _bb32 _bb34 _bb33
+add _bb30 _bb32 _bb31
+return # _bb30
+END
+IS html _bb20
+final # html
+BEGIN _bb54
+next name args
+BEGIN _bb56
+BUILTIN style ""
+END
+default # _bb56
+BEGIN _bb60
+IS dom dom
+str name name
+BUILTIN style ""
+BUILTIN cssclass ""
+list contents
+BEGIN _bb65
+BUILTIN contents ""
+get _bb67 this contents
+iter _bbmacro0 _bb67
+next _bb69 _bbmacro0
+AS element _bb69
+exists _bb70 element
+BEGIN _bb71
+str _bb73 element
+add contents contents _bb73
+next _bb69 _bbmacro0
+AS element _bb69
+exists _bb70 element
+END
+while # _bb70 _bb71
+BUILTIN preample ""
+BEGIN _bb75
+BUILTIN _bb77 "'"
+get _bb79 this cssclass
+str _bb80 _bb79
+BUILTIN _bb81 " class='"
+add _bb78 _bb81 _bb80
+add _bb76 _bb78 _bb77
+add preample preample _bb76
+END
+get _bb84 this cssclass
+len _bb83 _bb84
+bool _bb82 _bb83
+if # _bb82 _bb75
+BEGIN _bb85
+BUILTIN _bb87 "'"
+get _bb89 this style
+str _bb90 _bb89
+BUILTIN _bb91 " style='"
+add _bb88 _bb91 _bb90
+add _bb86 _bb88 _bb87
+add preample preample _bb86
+END
+get _bb94 this style
+len _bb93 _bb94
+bool _bb92 _bb93
+if # _bb92 _bb85
+BUILTIN _bb96 ">"
+get _bb98 this name
+str _bb99 _bb98
+BUILTIN _bb101 "</"
+str _bb103 contents
+BUILTIN _bb105 ">"
+str _bb107 preample
+BUILTIN _bb109 ""
+get _bb111 this name
+str _bb112 _bb111
+BUILTIN _bb113 "<"
+add _bb110 _bb113 _bb112
+add _bb108 _bb110 _bb109
+add _bb106 _bb108 _bb107
+add _bb104 _bb106 _bb105
+add _bb102 _bb104 _bb103
+add _bb100 _bb102 _bb101
+add _bb97 _bb100 _bb99
+add ret _bb97 _bb96
+return # ret
+END
+IS \str _bb65
+BEGIN _bb114
+next name args
+BEGIN _bb116
+list args name
+END
+get _bb118 this dom
+call child _bb116 _bb118
+get _bb119 this contents
+push # _bb119 child
+return # child
+END
+IS child _bb114
+BEGIN _bb120
+next other args
+get _bb121 this contents
+push # _bb121 other
+return # this
+END
+IS \and _bb120
+return # this
+END
+new _bb58 _bb60
+return # _bb58
+END
+IS dom _bb54
+final # dom
+BEGIN _bb122
+next cssclass args
+BEGIN _bb125
+str cssclass cssclass
+BEGIN _bb127
+next dom args
+BEGIN _bb128
+BUILTIN _bb129 " "
+get _bb130 dom cssclass
+add _bb130 _bb130 _bb129
+set # dom cssclass _bb130
+END
+get _bb133 dom cssclass
+len _bb132 _bb133
+bool _bb131 _bb132
+if # _bb131 _bb128
+get _bb134 this cssclass
+get _bb135 dom cssclass
+add _bb135 _bb135 _bb134
+set # dom cssclass _bb135
+return # dom
+END
+IS \call _bb127
+return # this
+END
+new _bb123 _bb125
+return # _bb123
+END
+IS cssclass _bb122
+final # cssclass
+BEGIN _bb136
+next style args
+BEGIN _bb139
+str style style
+BEGIN _bb141
+next dom args
+BEGIN _bb142
+BUILTIN _bb143 ";"
+get _bb144 dom style
+add _bb144 _bb144 _bb143
+set # dom style _bb144
+END
+get _bb147 dom style
+len _bb146 _bb147
+bool _bb145 _bb146
+if # _bb145 _bb142
+get _bb148 this style
+get _bb149 dom style
+add _bb149 _bb149 _bb148
+set # dom style _bb149
+return # dom
+END
+IS \call _bb141
+return # this
+END
+new _bb137 _bb139
+return # _bb137
+END
+IS style _bb136
+final # style
+BEGIN _bb150
+BEGIN _bb151
+BUILTIN _bb153 ""
+str _bb155 value
+BUILTIN _bb157 " "
+str _bb159 name
+BUILTIN _bb160 ""
+add _bb158 _bb160 _bb159
+add _bb156 _bb158 _bb157
+add _bb154 _bb156 _bb155
+add _bb152 _bb154 _bb153
+return # _bb152
+END
+IS \str _bb151
+BEGIN _bb161
 return # value
 END
-IS \float _bb31
-BEGIN _bb32
+IS \float _bb161
+BEGIN _bb162
 next other args
-get _bb34 other value
-lt _bb33 value _bb34
-return # _bb33
+get _bb164 other value
+lt _bb163 value _bb164
+return # _bb163
 END
-IS \lt _bb32
-BEGIN _bb35
+IS \lt _bb162
+BEGIN _bb165
 next other args
-get _bb37 other value
-gt _bb36 value _bb37
-return # _bb36
+get _bb167 other value
+gt _bb166 value _bb167
+return # _bb166
 END
-IS \gt _bb35
+IS \gt _bb165
 END
-IS explainable _bb20
+IS explainable _bb150
 final # explainable
-BEGIN _bb38
+BEGIN _bb168
 vector preds preds
 vector labels labels
 vector sensitive sensitive
 len n_preds preds
 len n_labels labels
 len n_sensitive sensitive
-BEGIN _bb45
-BUILTIN _bb47 ""
-str _bb49 n_labels
-BUILTIN _bb51 " that is different from label length "
-str _bb53 n_preds
-BUILTIN _bb54 "Predictions have length "
-add _bb52 _bb54 _bb53
-add _bb50 _bb52 _bb51
-add _bb48 _bb50 _bb49
-add _bb46 _bb48 _bb47
-fail # _bb46
+BEGIN _bb175
+BUILTIN _bb177 ""
+str _bb179 n_labels
+BUILTIN _bb181 " that is different from label length "
+str _bb183 n_preds
+BUILTIN _bb184 "Predictions have length "
+add _bb182 _bb184 _bb183
+add _bb180 _bb182 _bb181
+add _bb178 _bb180 _bb179
+add _bb176 _bb178 _bb177
+fail # _bb176
 END
-neq _bb55 n_preds n_labels
-if # _bb55 _bb45
-BEGIN _bb56
-BUILTIN _bb58 ""
-str _bb60 n_sensitive
-BUILTIN _bb62 " that is different from sensitive length "
-str _bb64 n_preds
-BUILTIN _bb65 "Predictions and labels have length "
-add _bb63 _bb65 _bb64
-add _bb61 _bb63 _bb62
-add _bb59 _bb61 _bb60
-add _bb57 _bb59 _bb58
-fail # _bb57
+neq _bb185 n_preds n_labels
+if # _bb185 _bb175
+BEGIN _bb186
+BUILTIN _bb188 ""
+str _bb190 n_sensitive
+BUILTIN _bb192 " that is different from sensitive length "
+str _bb194 n_preds
+BUILTIN _bb195 "Predictions and labels have length "
+add _bb193 _bb195 _bb194
+add _bb191 _bb193 _bb192
+add _bb189 _bb191 _bb190
+add _bb187 _bb189 _bb188
+fail # _bb187
 END
-neq _bb66 n_preds n_sensitive
-if # _bb66 _bb56
+neq _bb196 n_preds n_sensitive
+if # _bb196 _bb186
 END
-IS prepare _bb38
+IS prepare _bb168
 final # prepare
-BEGIN _bb67
+BEGIN _bb197
 next sorted_args args
-BUILTIN _bb70 I1
-len _bb71 sorted_args
-sub _bb69 _bb71 _bb70
-range _bbmacro0 _bb69
-next _bb72 _bbmacro0
-AS i _bb72
-exists _bb73 i
-BEGIN _bb74
-len _bb76 sorted_args
-BUILTIN _bb78 I1
-add _bb77 i _bb78
-range _bbmacro1 _bb77 _bb76
-next _bb79 _bbmacro1
-AS j _bb79
-exists _bb80 j
-BEGIN _bb81
-BEGIN _bb82
-at _bb83 sorted_args i
-IS temp _bb83
-at _bb84 sorted_args j
-put # sorted_args i _bb84
+BUILTIN _bb200 I1
+len _bb201 sorted_args
+sub _bb199 _bb201 _bb200
+range _bbmacro1 _bb199
+next _bb202 _bbmacro1
+AS i _bb202
+exists _bb203 i
+BEGIN _bb204
+len _bb206 sorted_args
+BUILTIN _bb208 I1
+add _bb207 i _bb208
+range _bbmacro2 _bb207 _bb206
+next _bb209 _bbmacro2
+AS j _bb209
+exists _bb210 j
+BEGIN _bb211
+BEGIN _bb212
+at _bb213 sorted_args i
+IS temp _bb213
+at _bb214 sorted_args j
+put # sorted_args i _bb214
 put # sorted_args j temp
 END
-at _bb86 sorted_args j
-at _bb87 sorted_args i
-gt _bb85 _bb87 _bb86
-if # _bb85 _bb82
-next _bb79 _bbmacro1
-AS j _bb79
-exists _bb80 j
+at _bb216 sorted_args j
+at _bb217 sorted_args i
+gt _bb215 _bb217 _bb216
+if # _bb215 _bb212
+next _bb209 _bbmacro2
+AS j _bb209
+exists _bb210 j
 END
-while # _bb80 _bb81
-next _bb72 _bbmacro0
-AS i _bb72
-exists _bb73 i
+while # _bb210 _bb211
+next _bb202 _bbmacro1
+AS i _bb202
+exists _bb203 i
 END
-while # _bb73 _bb74
+while # _bb203 _bb204
 return # sorted_args
 END
-IS sort _bb67
+IS sort _bb197
 final # sort
-BEGIN _bb90
+BEGIN _bb220
 IS prepare prepare
 final # prepare
 IS explainable explainable
 final # explainable
 return # this
 END
-new metrics _bb90
+new metrics _bb220
 final # metrics
-BEGIN _bb91
-inline _bb92 prepare
-BUILTIN _bb96 I1
-sub _bb95 _bb96 labels
-BUILTIN _bb98 I1
-sub _bb97 _bb98 preds
-mul _bb94 _bb97 _bb95
-mul _bb99 preds labels
-add correct _bb99 _bb94
-mul _bb100 correct sensitive
-sum correct _bb100
+BEGIN _bb221
+inline _bb222 prepare
+BUILTIN _bb226 I1
+sub _bb225 _bb226 labels
+BUILTIN _bb228 I1
+sub _bb227 _bb228 preds
+mul _bb224 _bb227 _bb225
+mul _bb229 preds labels
+add correct _bb229 _bb224
+mul _bb230 correct sensitive
+sum correct _bb230
 sum samples sensitive
-BEGIN _bb105
-inline _bb106 explainable
+BEGIN _bb235
+inline _bb236 explainable
 BUILTIN name "acc"
 BUILTIN desc "accuracy"
-BEGIN _bb111
-BEGIN _bb112
-BUILTIN _bb113 I1
-return # _bb113
+BEGIN _bb241
+BEGIN _bb242
+BUILTIN _bb243 I1
+return # _bb243
 END
-BEGIN _bb114
-div _bb115 correct samples
-return # _bb115
+BEGIN _bb244
+div _bb245 correct samples
+return # _bb245
 END
-BUILTIN _bb117 I0
-eq _bb116 samples _bb117
-if # _bb116 _bb112 _bb114
+BUILTIN _bb247 I0
+eq _bb246 samples _bb247
+if # _bb246 _bb242 _bb244
 END
-try value _bb111
+try value _bb241
 IS correct correct
 IS samples samples
 return # this
 END
-new _bb103 _bb105
-return # _bb103
+new _bb233 _bb235
+return # _bb233
 END
-set # metrics acc _bb91
-BEGIN _bb118
-inline _bb119 prepare
+set # metrics acc _bb221
+BEGIN _bb248
+inline _bb249 prepare
 mul positives preds sensitive
 sum total_samples sensitive
 sum positive_count positives
-BEGIN _bb125
-inline _bb126 explainable
+BEGIN _bb255
+inline _bb256 explainable
 BUILTIN name "pr"
 BUILTIN desc "positive rate"
-BEGIN _bb131
-BEGIN _bb132
-BUILTIN _bb133 I0
-return # _bb133
+BEGIN _bb261
+BEGIN _bb262
+BUILTIN _bb263 I0
+return # _bb263
 END
-BEGIN _bb134
-div _bb135 positive_count total_samples
-return # _bb135
+BEGIN _bb264
+div _bb265 positive_count total_samples
+return # _bb265
 END
-BUILTIN _bb137 I0
-eq _bb136 total_samples _bb137
-if # _bb136 _bb132 _bb134
+BUILTIN _bb267 I0
+eq _bb266 total_samples _bb267
+if # _bb266 _bb262 _bb264
 END
-try value _bb131
+try value _bb261
 IS positive_count positive_count
 IS total_samples total_samples
 return # this
 END
-new _bb123 _bb125
-return # _bb123
+new _bb253 _bb255
+return # _bb253
 END
-set # metrics pr _bb118
-BEGIN _bb138
-inline _bb139 prepare
-mul _bb141 preds labels
-mul true_positives _bb141 sensitive
+set # metrics pr _bb248
+BEGIN _bb268
+inline _bb269 prepare
+mul _bb271 preds labels
+mul true_positives _bb271 sensitive
 mul positives labels sensitive
 sum tp_sum true_positives
 sum pos_sum positives
-BEGIN _bb147
-inline _bb148 explainable
+BEGIN _bb277
+inline _bb278 explainable
 BUILTIN name "tpr"
 BUILTIN desc "true positive rate"
-BEGIN _bb153
-BEGIN _bb154
-BUILTIN _bb155 I0
-return # _bb155
+BEGIN _bb283
+BEGIN _bb284
+BUILTIN _bb285 I0
+return # _bb285
 END
-BEGIN _bb156
-div _bb157 tp_sum pos_sum
-return # _bb157
+BEGIN _bb286
+div _bb287 tp_sum pos_sum
+return # _bb287
 END
-BUILTIN _bb159 I0
-eq _bb158 pos_sum _bb159
-if # _bb158 _bb154 _bb156
+BUILTIN _bb289 I0
+eq _bb288 pos_sum _bb289
+if # _bb288 _bb284 _bb286
 END
-try value _bb153
+try value _bb283
 IS true_positives tp_sum
 IS positives pos_sum
 return # this
 END
-new _bb145 _bb147
-return # _bb145
+new _bb275 _bb277
+return # _bb275
 END
-set # metrics tpr _bb138
-BEGIN _bb160
-inline _bb161 prepare
-BUILTIN _bb165 I1
-sub _bb164 _bb165 labels
-BUILTIN _bb167 I1
-sub _bb166 _bb167 preds
-mul _bb163 _bb166 _bb164
-mul true_negatives _bb163 sensitive
-BUILTIN _bb170 I1
-sub _bb169 _bb170 labels
-mul negatives _bb169 sensitive
+set # metrics tpr _bb268
+BEGIN _bb290
+inline _bb291 prepare
+BUILTIN _bb295 I1
+sub _bb294 _bb295 labels
+BUILTIN _bb297 I1
+sub _bb296 _bb297 preds
+mul _bb293 _bb296 _bb294
+mul true_negatives _bb293 sensitive
+BUILTIN _bb300 I1
+sub _bb299 _bb300 labels
+mul negatives _bb299 sensitive
 sum tn_sum true_negatives
 sum neg_sum negatives
-BEGIN _bb175
-inline _bb176 explainable
+BEGIN _bb305
+inline _bb306 explainable
 BUILTIN name "tnr"
 BUILTIN desc "true negative rate"
-BEGIN _bb181
-BEGIN _bb182
-BUILTIN _bb183 I0
-return # _bb183
+BEGIN _bb311
+BEGIN _bb312
+BUILTIN _bb313 I0
+return # _bb313
 END
-BEGIN _bb184
-div _bb185 tn_sum neg_sum
-return # _bb185
+BEGIN _bb314
+div _bb315 tn_sum neg_sum
+return # _bb315
 END
-BUILTIN _bb187 I0
-eq _bb186 neg_sum _bb187
-if # _bb186 _bb182 _bb184
+BUILTIN _bb317 I0
+eq _bb316 neg_sum _bb317
+if # _bb316 _bb312 _bb314
 END
-try value _bb181
+try value _bb311
 IS true_negatives tn_sum
 IS negatives neg_sum
 return # this
 END
-new _bb173 _bb175
-return # _bb173
+new _bb303 _bb305
+return # _bb303
 END
-set # metrics tnr _bb160
-BEGIN _bb190
+set # metrics tnr _bb290
+BEGIN _bb320
 IS explainable explainable
 final # explainable
 IS sort sort
 final # sort
 return # this
 END
-new reduce _bb190
+new reduce _bb320
 final # reduce
-BEGIN _bb191
+BEGIN _bb321
 next args args
-BUILTIN _bb193 I0
-at _bb192 args _bb193
-IS best _bb192
-len _bb195 args
-BUILTIN _bb196 I1
-range _bbmacro2 _bb196 _bb195
-next _bb197 _bbmacro2
-AS i _bb197
-exists _bb198 i
-BEGIN _bb199
-BEGIN _bb200
-at _bb201 args i
-IS best _bb201
+BUILTIN _bb323 I0
+at _bb322 args _bb323
+IS best _bb322
+len _bb325 args
+BUILTIN _bb326 I1
+range _bbmacro3 _bb326 _bb325
+next _bb327 _bbmacro3
+AS i _bb327
+exists _bb328 i
+BEGIN _bb329
+BEGIN _bb330
+at _bb331 args i
+IS best _bb331
 END
-at _bb203 args i
-lt _bb202 _bb203 best
-if # _bb202 _bb200
-next _bb197 _bbmacro2
-AS i _bb197
-exists _bb198 i
+at _bb333 args i
+lt _bb332 _bb333 best
+if # _bb332 _bb330
+next _bb327 _bbmacro3
+AS i _bb327
+exists _bb328 i
 END
-while # _bb198 _bb199
-BEGIN _bb206
-inline _bb207 explainable
-get _bb209 best name
-BUILTIN _bb210 "min "
-add name _bb210 _bb209
+while # _bb328 _bb329
+BEGIN _bb336
+inline _bb337 explainable
+get _bb339 best name
+BUILTIN _bb340 "min "
+add name _bb340 _bb339
 final # name
-get _bb212 best desc
-BUILTIN _bb213 "minimum of "
-add desc _bb213 _bb212
+get _bb342 best desc
+BUILTIN _bb343 "minimum of "
+add desc _bb343 _bb342
 final # desc
 float value best
 final # value
 return # this
 END
-new _bb204 _bb206
-return # _bb204
+new _bb334 _bb336
+return # _bb334
 END
-set # reduce min _bb191
-BEGIN _bb215
+set # reduce min _bb321
+BEGIN _bb345
 next args args
-BUILTIN _bb217 I0
-at _bb216 args _bb217
-IS best _bb216
-len _bb219 args
-BUILTIN _bb220 I1
-range _bbmacro3 _bb220 _bb219
-next _bb221 _bbmacro3
-AS i _bb221
-exists _bb222 i
-BEGIN _bb223
-BEGIN _bb224
-at _bb225 args i
-IS best _bb225
+BUILTIN _bb347 I0
+at _bb346 args _bb347
+IS best _bb346
+len _bb349 args
+BUILTIN _bb350 I1
+range _bbmacro4 _bb350 _bb349
+next _bb351 _bbmacro4
+AS i _bb351
+exists _bb352 i
+BEGIN _bb353
+BEGIN _bb354
+at _bb355 args i
+IS best _bb355
 END
-at _bb227 args i
-gt _bb226 _bb227 best
-if # _bb226 _bb224
-next _bb221 _bbmacro3
-AS i _bb221
-exists _bb222 i
+at _bb357 args i
+gt _bb356 _bb357 best
+if # _bb356 _bb354
+next _bb351 _bbmacro4
+AS i _bb351
+exists _bb352 i
 END
-while # _bb222 _bb223
-BEGIN _bb230
-inline _bb231 explainable
-get _bb233 best name
-BUILTIN _bb234 "max "
-add name _bb234 _bb233
+while # _bb352 _bb353
+BEGIN _bb360
+inline _bb361 explainable
+get _bb363 best name
+BUILTIN _bb364 "max "
+add name _bb364 _bb363
 final # name
-get _bb236 best desc
-BUILTIN _bb237 "maximum of "
-add desc _bb237 _bb236
+get _bb366 best desc
+BUILTIN _bb367 "maximum of "
+add desc _bb367 _bb366
 final # desc
 float value best
 final # value
 return # this
 END
-new _bb228 _bb230
-return # _bb228
+new _bb358 _bb360
+return # _bb358
 END
-set # reduce max _bb215
-BEGIN _bb239
+set # reduce max _bb345
+BEGIN _bb369
 next args args
-len _bb241 args
-sum _bb242 args
-div mean _bb242 _bb241
+len _bb371 args
+sum _bb372 args
+div mean _bb372 _bb371
 BUILTIN squares I0
 BUILTIN sums I0
-iter _bbmacro4 args
-next _bb246 _bbmacro4
-AS x _bb246
-exists _bb247 x
-BEGIN _bb248
-BUILTIN _bb250 I2
-sub _bb251 x mean
-pow _bb249 _bb251 _bb250
-add squares squares _bb249
+iter _bbmacro5 args
+next _bb376 _bbmacro5
+AS x _bb376
+exists _bb377 x
+BEGIN _bb378
+BUILTIN _bb380 I2
+sub _bb381 x mean
+pow _bb379 _bb381 _bb380
+add squares squares _bb379
 add sums sums x
-next _bb246 _bbmacro4
-AS x _bb246
-exists _bb247 x
+next _bb376 _bbmacro5
+AS x _bb376
+exists _bb377 x
 END
-while # _bb247 _bb248
-len _bb253 args
-div variance squares _bb253
-BEGIN _bb255
+while # _bb377 _bb378
+len _bb383 args
+div variance squares _bb383
+BEGIN _bb385
 list args variance
 END
-call std_dev _bb255 sqrt
-BEGIN _bb258
-inline _bb259 explainable
-BUILTIN _bb261 " std"
-get _bb262 x name
-add name _bb262 _bb261
+call std_dev _bb385 sqrt
+BEGIN _bb388
+inline _bb389 explainable
+BUILTIN _bb391 " std"
+get _bb392 x name
+add name _bb392 _bb391
 final # name
-BUILTIN _bb266 I0
-at _bb265 args _bb266
-get _bb264 _bb265 desc
-BUILTIN _bb267 "standard deviation of "
-add desc _bb267 _bb264
+BUILTIN _bb396 I0
+at _bb395 args _bb396
+get _bb394 _bb395 desc
+BUILTIN _bb397 "standard deviation of "
+add desc _bb397 _bb394
 final # desc
 IS value std_dev
 final # value
 return # this
 END
-new _bb256 _bb258
-return # _bb256
+new _bb386 _bb388
+return # _bb386
 END
-set # reduce std _bb239
-BEGIN _bb268
+set # reduce std _bb369
+BEGIN _bb398
 next args args
-BEGIN _bb270
+BEGIN _bb400
 list args args
 END
-call sorted_args _bb270 sort
+call sorted_args _bb400 sort
 len n sorted_args
 BUILTIN cumulative_sum I0
 sum total_sum sorted_args
-range _bbmacro5 n
-next _bb276 _bbmacro5
-AS i _bb276
-exists _bb277 i
-BEGIN _bb278
-at _bb280 sorted_args i
-BUILTIN _bb282 I1
-add _bb281 i _bb282
-mul _bb279 _bb281 _bb280
-add cumulative_sum cumulative_sum _bb279
-next _bb276 _bbmacro5
-AS i _bb276
-exists _bb277 i
+range _bbmacro6 n
+next _bb406 _bbmacro6
+AS i _bb406
+exists _bb407 i
+BEGIN _bb408
+at _bb410 sorted_args i
+BUILTIN _bb412 I1
+add _bb411 i _bb412
+mul _bb409 _bb411 _bb410
+add cumulative_sum cumulative_sum _bb409
+next _bb406 _bbmacro6
+AS i _bb406
+exists _bb407 i
 END
-while # _bb277 _bb278
-BUILTIN _bb286 I1
-add _bb285 n _bb286
-div _bb284 _bb285 n
-mul _bb288 n total_sum
-BUILTIN _bb290 I2
-mul _bb289 _bb290 cumulative_sum
-div _bb287 _bb289 _bb288
-sub gini _bb287 _bb284
-BEGIN _bb293
-inline _bb294 explainable
-BUILTIN _bb296 " gini"
-BUILTIN _bb299 I0
-at _bb298 args _bb299
-get _bb297 _bb298 name
-add name _bb297 _bb296
+while # _bb407 _bb408
+BUILTIN _bb416 I1
+add _bb415 n _bb416
+div _bb414 _bb415 n
+mul _bb418 n total_sum
+BUILTIN _bb420 I2
+mul _bb419 _bb420 cumulative_sum
+div _bb417 _bb419 _bb418
+sub gini _bb417 _bb414
+BEGIN _bb423
+inline _bb424 explainable
+BUILTIN _bb426 " gini"
+BUILTIN _bb429 I0
+at _bb428 args _bb429
+get _bb427 _bb428 name
+add name _bb427 _bb426
 final # name
-BUILTIN _bb303 I0
-at _bb302 args _bb303
-get _bb301 _bb302 desc
-BUILTIN _bb304 "gini coefficient of "
-add desc _bb304 _bb301
+BUILTIN _bb433 I0
+at _bb432 args _bb433
+get _bb431 _bb432 desc
+BUILTIN _bb434 "gini coefficient of "
+add desc _bb434 _bb431
 final # desc
 IS value gini
 final # value
 return # this
 END
-new _bb291 _bb293
-return # _bb291
+new _bb421 _bb423
+return # _bb421
 END
-set # reduce gini _bb268
-BEGIN _bb305
+set # reduce gini _bb398
+BEGIN _bb435
 next args args
-BEGIN _bb307
+BEGIN _bb437
 list args args
 END
-call sorted_args _bb307 sort
-BUILTIN _bb313 I1
-len _bb314 args
-sub _bb312 _bb314 _bb313
-at _bb311 sorted_args _bb312
-float _bb310 _bb311
-BUILTIN _bb317 I0
-at _bb316 sorted_args _bb317
-float _bb315 _bb316
-div min_ratio _bb315 _bb310
-BEGIN _bb320
-inline _bb321 explainable
-BUILTIN _bb323 " minratio"
-BUILTIN _bb326 I0
-at _bb325 args _bb326
-get _bb324 _bb325 name
-add name _bb324 _bb323
+call sorted_args _bb437 sort
+BUILTIN _bb443 I1
+len _bb444 args
+sub _bb442 _bb444 _bb443
+at _bb441 sorted_args _bb442
+float _bb440 _bb441
+BUILTIN _bb447 I0
+at _bb446 sorted_args _bb447
+float _bb445 _bb446
+div min_ratio _bb445 _bb440
+BEGIN _bb450
+inline _bb451 explainable
+BUILTIN _bb453 " minratio"
+BUILTIN _bb456 I0
+at _bb455 args _bb456
+get _bb454 _bb455 name
+add name _bb454 _bb453
 final # name
-BUILTIN _bb330 I0
-at _bb329 args _bb330
-get _bb328 _bb329 desc
-BUILTIN _bb331 "minimum ratio between "
-add desc _bb331 _bb328
+BUILTIN _bb460 I0
+at _bb459 args _bb460
+get _bb458 _bb459 desc
+BUILTIN _bb461 "minimum ratio between "
+add desc _bb461 _bb458
 final # desc
 IS value min_ratio
 final # value
 return # this
 END
-new _bb318 _bb320
-return # _bb318
+new _bb448 _bb450
+return # _bb448
 END
-set # reduce minratio _bb305
-BEGIN _bb332
+set # reduce minratio _bb435
+BEGIN _bb462
 next args args
-BEGIN _bb334
+BEGIN _bb464
 list args args
 END
-call sorted_args _bb334 sort
-BUILTIN _bb339 I0
-at _bb338 sorted_args _bb339
-float _bb337 _bb338
-BUILTIN _bb343 I1
-len _bb344 args
-sub _bb342 _bb344 _bb343
-at _bb341 sorted_args _bb342
-float _bb340 _bb341
-sub max_difference _bb340 _bb337
-BEGIN _bb347
-inline _bb348 explainable
-BUILTIN _bb350 " maxdiff"
-BUILTIN _bb353 I0
-at _bb352 args _bb353
-get _bb351 _bb352 name
-add name _bb351 _bb350
+call sorted_args _bb464 sort
+BUILTIN _bb469 I0
+at _bb468 sorted_args _bb469
+float _bb467 _bb468
+BUILTIN _bb473 I1
+len _bb474 args
+sub _bb472 _bb474 _bb473
+at _bb471 sorted_args _bb472
+float _bb470 _bb471
+sub max_difference _bb470 _bb467
+BEGIN _bb477
+inline _bb478 explainable
+BUILTIN _bb480 " maxdiff"
+BUILTIN _bb483 I0
+at _bb482 args _bb483
+get _bb481 _bb482 name
+add name _bb481 _bb480
 final # name
-BUILTIN _bb357 I0
-at _bb356 args _bb357
-get _bb355 _bb356 desc
-BUILTIN _bb358 "maximum difference between "
-add desc _bb358 _bb355
+BUILTIN _bb487 I0
+at _bb486 args _bb487
+get _bb485 _bb486 desc
+BUILTIN _bb488 "maximum difference between "
+add desc _bb488 _bb485
 final # desc
 IS value max_difference
 final # value
 return # this
 END
-new _bb345 _bb347
-return # _bb345
+new _bb475 _bb477
+return # _bb475
 END
-set # reduce maxdiff _bb332
-BEGIN _bb359
-BEGIN _bb360
-BUILTIN _bb362 " sensitive attributes"
-get _bb364 this sensitive
-len _bb365 _bb364
-str _bb366 _bb365
-BUILTIN _bb367 "A fork of "
-add _bb363 _bb367 _bb366
-add _bb361 _bb363 _bb362
-return # _bb361
+set # reduce maxdiff _bb462
+BEGIN _bb489
+BEGIN _bb490
+BUILTIN _bb492 " sensitive attributes"
+get _bb494 this sensitive
+len _bb495 _bb494
+str _bb496 _bb495
+BUILTIN _bb497 "A fork of "
+add _bb493 _bb497 _bb496
+add _bb491 _bb493 _bb492
+return # _bb491
 END
-IS \str _bb360
-BEGIN _bb368
+IS \str _bb490
+BEGIN _bb498
 list ret
-get _bb370 this sensitive
-iter _bbmacro6 _bb370
-next _bb372 _bbmacro6
-AS sens _bb372
-exists _bb373 sens
-BEGIN _bb374
-BEGIN _bb376
+get _bb500 this sensitive
+iter _bbmacro7 _bb500
+next _bb502 _bbmacro7
+AS sens _bb502
+exists _bb503 sens
+BEGIN _bb504
+BEGIN _bb506
 IS sensitive sens
 IS labels labels
 IS preds preds
 END
-call value _bb376 measure
+call value _bb506 measure
 push # ret value
-next _bb372 _bbmacro6
-AS sens _bb372
-exists _bb373 sens
+next _bb502 _bbmacro7
+AS sens _bb502
+exists _bb503 sens
 END
-while # _bb373 _bb374
-BEGIN _bb378
+while # _bb503 _bb504
+BEGIN _bb508
 list args ret
 END
-call _bb377 _bb378 reduce
-return # _bb377
+call _bb507 _bb508 reduce
+return # _bb507
 END
-IS \call _bb368
+IS \call _bb498
 END
-IS fork _bb359
+IS fork _bb489
 final # fork
-BEGIN _bb379
-next value args
-float value value
-BUILTIN _bb382 I10
-mul _bb381 value _bb382
-int value _bb381
-BUILTIN ret ""
-range _bbmacro7 value
-next _bb386 _bbmacro7
-AS i _bb386
-exists _bb387 i
-BEGIN _bb388
-BUILTIN _bb390 "■"
-add ret ret _bb390
-next _bb386 _bbmacro7
-AS i _bb386
-exists _bb387 i
+BEGIN _bb533
+get _bb534 metrics acc
+IS measure _bb534
+get _bb535 reduce min
+IS reduce _bb535
 END
-while # _bb387 _bb388
-return # ret
+BEGIN _bb536
+get _bb537 metrics pr
+IS measure _bb537
+get _bb538 reduce minratio
+IS reduce _bb538
 END
-IS bar _bb379
-final # bar
-BEGIN _bb391
-next value args
-BEGIN _bb393
-BUILTIN size I20
+BEGIN _bb539
+get _bb540 metrics tpr
+IS measure _bb540
+get _bb541 reduce maxdiff
+IS reduce _bb541
 END
-default # _bb393
-str ret value
-len _bb397 ret
-range _bbmacro8 _bb397 size
-next _bb398 _bbmacro8
-AS i _bb398
-exists _bb399 i
-BEGIN _bb400
-BUILTIN _bb402 " "
-add ret ret _bb402
-next _bb398 _bbmacro8
-AS i _bb398
-exists _bb399 i
+BEGIN _bb542
+get _bb543 metrics tnr
+IS measure _bb543
+get _bb544 reduce maxdiff
+IS reduce _bb544
 END
-while # _bb399 _bb400
-return # ret
-END
-IS left _bb391
-final # left
-BEGIN _bb403
-next title args
-next body args
-BEGIN _bb405
-BUILTIN script ""
-END
-default # _bb405
-BUILTIN _bb408 "         </body>         </html>     "
-str _bb410 body
-BUILTIN _bb412 "</script>         </head>         <body>         "
-str _bb414 script
-str _bb415 _bb414
-BUILTIN _bb417 "</title>             <script>"
-str _bb419 title
-str _bb420 _bb419
-BUILTIN _bb421 "<!DOCTYPE html>         <html>         <head>             <title>"
-add _bb418 _bb421 _bb420
-add _bb416 _bb418 _bb417
-add _bb413 _bb416 _bb415
-add _bb411 _bb413 _bb412
-add _bb409 _bb411 _bb410
-add _bb407 _bb409 _bb408
-return # _bb407
-END
-IS html _bb403
-final # html
-BEGIN _bb422
-next name args
-BEGIN _bb425
-IS name name
-list contents
-BEGIN _bb427
-BUILTIN contents ""
-get _bb429 this contents
-iter _bbmacro9 _bb429
-next _bb431 _bbmacro9
-AS element _bb431
-exists _bb432 element
-BEGIN _bb433
-str _bb435 element
-add contents contents _bb435
-next _bb431 _bbmacro9
-AS element _bb431
-exists _bb432 element
-END
-while # _bb432 _bb433
-BUILTIN _bb437 ">"
-get _bb439 this name
-str _bb440 _bb439
-BUILTIN _bb442 "</"
-str _bb444 contents
-BUILTIN _bb446 ">"
-get _bb448 this name
-str _bb449 _bb448
-BUILTIN _bb450 "<"
-add _bb447 _bb450 _bb449
-add _bb445 _bb447 _bb446
-add _bb443 _bb445 _bb444
-add _bb441 _bb443 _bb442
-add _bb438 _bb441 _bb440
-add ret _bb438 _bb437
-print # ret
-return # ret
-END
-IS \str _bb427
-BEGIN _bb451
-next other args
-get _bb452 this contents
-push # _bb452 other
-return # this
-END
-IS \add _bb451
-return # this
-END
-new _bb423 _bb425
-return # _bb423
-END
-IS dom _bb422
-final # dom
-BEGIN _bb453
-get _bb454 metrics acc
-IS measure _bb454
-get _bb455 reduce min
-IS reduce _bb455
-END
-BEGIN _bb456
-get _bb457 metrics pr
-IS measure _bb457
-get _bb458 reduce minratio
-IS reduce _bb458
-END
-BEGIN _bb459
-get _bb460 metrics tpr
-IS measure _bb460
-get _bb461 reduce maxdiff
-IS reduce _bb461
-END
-BEGIN _bb462
-get _bb463 metrics tpr
-IS measure _bb463
-get _bb464 reduce maxdiff
-IS reduce _bb464
-END
-BEGIN _bb465
-get _bb466 metrics tnr
-IS measure _bb466
-get _bb467 reduce maxdiff
-IS reduce _bb467
-END
-list configs _bb453 _bb456 _bb459 _bb462 _bb465
-BUILTIN _bb470 I1
-BUILTIN _bb471 I0
-BUILTIN _bb472 I1
-BUILTIN _bb473 I0
-BUILTIN _bb474 I1
-BUILTIN _bb475 I0
-BUILTIN _bb476 I1
-BUILTIN _bb477 I0
-BUILTIN _bb478 I1
-BUILTIN _bb479 I0
-list _bb480 _bb470 _bb471 _bb472 _bb473 _bb474 _bb475 _bb476 _bb477 _bb478 _bb479
-vector preds _bb480
-BUILTIN _bb482 I1
-BUILTIN _bb483 I1
-BUILTIN _bb484 I0
-BUILTIN _bb485 I1
-BUILTIN _bb486 I0
-BUILTIN _bb487 I0
-BUILTIN _bb488 I0
-BUILTIN _bb489 I1
-BUILTIN _bb490 I1
-BUILTIN _bb491 I1
-list _bb492 _bb482 _bb483 _bb484 _bb485 _bb486 _bb487 _bb488 _bb489 _bb490 _bb491
-vector labels _bb492
-BUILTIN _bb494 I1
-BUILTIN _bb495 I1
-BUILTIN _bb496 I0
-BUILTIN _bb497 I0
-BUILTIN _bb498 I1
-BUILTIN _bb499 I0
-BUILTIN _bb500 I1
-BUILTIN _bb501 I1
-BUILTIN _bb502 I0
-BUILTIN _bb503 I0
-list _bb504 _bb494 _bb495 _bb496 _bb497 _bb498 _bb499 _bb500 _bb501 _bb502 _bb503
-vector men _bb504
-BUILTIN _bb506 I1
-sub women _bb506 men
-BEGIN _bb509
-inline _bb510 fork
+list configs _bb533 _bb536 _bb539 _bb542
+BUILTIN _bb547 I1
+BUILTIN _bb548 I0
+BUILTIN _bb549 I1
+BUILTIN _bb550 I0
+BUILTIN _bb551 I1
+BUILTIN _bb552 I0
+BUILTIN _bb553 I1
+BUILTIN _bb554 I0
+BUILTIN _bb555 I1
+BUILTIN _bb556 I0
+list _bb557 _bb547 _bb548 _bb549 _bb550 _bb551 _bb552 _bb553 _bb554 _bb555 _bb556
+vector preds _bb557
+BUILTIN _bb559 I1
+BUILTIN _bb560 I1
+BUILTIN _bb561 I0
+BUILTIN _bb562 I1
+BUILTIN _bb563 I0
+BUILTIN _bb564 I0
+BUILTIN _bb565 I0
+BUILTIN _bb566 I1
+BUILTIN _bb567 I1
+BUILTIN _bb568 I1
+list _bb569 _bb559 _bb560 _bb561 _bb562 _bb563 _bb564 _bb565 _bb566 _bb567 _bb568
+vector labels _bb569
+BUILTIN _bb571 I1
+BUILTIN _bb572 I1
+BUILTIN _bb573 I0
+BUILTIN _bb574 I0
+BUILTIN _bb575 I1
+BUILTIN _bb576 I0
+BUILTIN _bb577 I1
+BUILTIN _bb578 I1
+BUILTIN _bb579 I0
+BUILTIN _bb580 I0
+list _bb581 _bb571 _bb572 _bb573 _bb574 _bb575 _bb576 _bb577 _bb578 _bb579 _bb580
+vector men _bb581
+BUILTIN _bb583 I1
+sub women _bb583 men
+BEGIN _bb586
+inline _bb587 fork
 list sensitive men women
 return # this
 END
-new sensitive _bb509
-BEGIN _bb513
-BUILTIN _bb515 "table"
-list args _bb515
+new sensitive _bb586
+BEGIN _bb589
+BEGIN _bb591
+BEGIN _bb594
+BUILTIN _bb596 "table"
+list args _bb596
 END
-call result _bb513 dom
+call _bb593 _bb594 dom
+list args _bb593
+END
+BEGIN _bb598
+BUILTIN _bb599 "table"
+list args _bb599
+END
+call _bb597 _bb598 cssclass
+call results _bb591 _bb597
+BEGIN _bb601
+BUILTIN _bb603 "tbody"
+list args _bb603
+END
+call results_body _bb601 dom
+and results results results_body
 iter _bbmacro10 configs
-next _bb517 _bbmacro10
-AS config _bb517
-exists _bb518 config
-BEGIN _bb519
-BEGIN _bb521
-inline _bb522 config
+next _bb605 _bbmacro10
+AS config _bb605
+exists _bb606 config
+BEGIN _bb607
+BEGIN _bb609
+inline _bb610 config
 IS preds preds
 IS labels labels
 END
-call value _bb521 sensitive
-BUILTIN _bb524 ""
-BEGIN _bb527
-list args value
+call value _bb609 sensitive
+float _bb613 value
+BEGIN _bb615
+BUILTIN _bb617 "td"
+list args _bb617
 END
-call _bb526 _bb527 bar
-str _bb529 _bb526
-BUILTIN _bb531 " | "
-BEGIN _bb534
-list args value
+call _bb614 _bb615 dom
+and _bb612 _bb614 _bb613
+get _bb621 value name
+str _bb620 _bb621
+BEGIN _bb623
+BUILTIN _bb625 "td"
+list args _bb625
 END
-call _bb533 _bb534 left
-str _bb536 _bb533
-BUILTIN _bb537 ""
-add _bb532 _bb537 _bb536
-add _bb530 _bb532 _bb531
-add _bb525 _bb530 _bb529
-add _bb523 _bb525 _bb524
-print # _bb523
-BEGIN _bb539
-BUILTIN _bb541 "tr"
-list args _bb541
+call _bb622 _bb623 dom
+and _bb619 _bb622 _bb620
+BEGIN _bb627
+BUILTIN _bb629 "tr"
+list args _bb629
 END
-call row _bb539 dom
-get _bb544 value name
-str _bb543 _bb544
-BEGIN _bb546
-BUILTIN _bb548 "td"
-list args _bb548
+call _bb626 _bb627 dom
+and _bb618 _bb626 _bb619
+and _bb611 _bb618 _bb612
+and results_body results_body _bb611
+next _bb605 _bbmacro10
+AS config _bb605
+exists _bb606 config
 END
-call _bb545 _bb546 dom
-add _bb542 _bb545 _bb543
-add row row _bb542
-float _bb550 value
-BEGIN _bb552
-BUILTIN _bb554 "td"
-list args _bb554
+while # _bb606 _bb607
+BEGIN _bb631
+BEGIN _bb634
+BUILTIN _bb636 "div"
+list args _bb636
 END
-call _bb551 _bb552 dom
-add _bb549 _bb551 _bb550
-add row row _bb549
-add result result row
-next _bb517 _bbmacro10
-AS config _bb517
-exists _bb518 config
+call _bb633 _bb634 dom
+list args _bb633
 END
-while # _bb518 _bb519
-BUILTIN _bb555 I5000
-server routes _bb555
-BEGIN _bb557
-BUILTIN _bb558 "Up and running"
-return # _bb558
+BEGIN _bb638
+BUILTIN _bb639 "container d-flex justify-content-center"
+list args _bb639
 END
-BUILTIN _bb559 "/test"
-put # routes _bb559 _bb557
-BEGIN _bb560
-BEGIN _bb562
-BUILTIN _bb563 "Title"
-list args _bb563 result
+call _bb637 _bb638 cssclass
+call center _bb631 _bb637
+and center center results
+BUILTIN src "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+BUILTIN stylesheet "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+BEGIN _bb643
+BUILTIN _bb644 "Title"
+list args _bb644 center
+IS src src
+IS stylesheet stylesheet
 END
-call _bb561 _bb562 html
-return # _bb561
+call _bb642 _bb643 html
+return # _bb642
 END
-BUILTIN _bb565 "/results"
-put # routes _bb565 _bb560
-BUILTIN _bb566 Btrue
-BEGIN _bb567
-BUILTIN _bb566 Btrue
+IS create_page _bb589
+call _bb646 # create_page
+BUILTIN _bb647 I5000
+server routes _bb647
+BEGIN _bb649
+BUILTIN _bb650 "Up and running"
+return # _bb650
 END
-while # _bb566 _bb567
+BUILTIN _bb651 "/test"
+put # routes _bb651 _bb649
+BUILTIN _bb652 "/results"
+put # routes _bb652 create_page
+BUILTIN _bb653 Btrue
+BEGIN _bb654
+BUILTIN _bb653 Btrue
+END
+while # _bb653 _bb654

@@ -2,7 +2,10 @@
 #include "ops/sort"
 
 
-final reduce = new {final explainable = explainable; final sort = sort;}
+final reduce = new {
+    final explainable = explainable;
+    final sort = sort;
+}
 
 
 reduce.min(args) = {
@@ -58,9 +61,8 @@ reduce.gini(args) = {
     n = len(sorted_args);
     cumulative_sum = 0;
     total_sum = sum(sorted_args);
-    while(i as loop::range(n)) {
+    while(i as loop::range(n))
         cumulative_sum += (i + 1) * sorted_args[i];
-    }
     gini = (2 * cumulative_sum) / (n * total_sum) - (n + 1) / n;
     return new {
         explainable:

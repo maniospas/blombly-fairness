@@ -1,5 +1,6 @@
 #include "libs/loop"
 
+
 final fork = {
     final \str = {return "A fork of {len(this.sensitive)} sensitive attributes"}
     final \call = {
