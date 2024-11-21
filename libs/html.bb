@@ -1,7 +1,4 @@
-#include "libs/loop"
-
-
-final html(title, body) = {
+html(title, body) = {
     default script = "";
     default src = "";
     default stylesheet = "";
@@ -19,7 +16,7 @@ final html(title, body) = {
     ";
 }
 
-final dom(name) = {
+dom(name) = {
     default style = "";
     return new {
         dom = dom;
@@ -30,7 +27,7 @@ final dom(name) = {
         \str = {
             // combine contents
             contents = "";
-            while(element as loop::next(this.contents))
+            while(element as next(!of this.contents|iter))
                 contents = contents + element|str;
             // additional element values
             preample = "";
@@ -45,14 +42,14 @@ final dom(name) = {
             push(this.contents, child);
             return child;
         }
-        \and(other) = {
+        \add(other) = {
             push(this.contents, other);
             return this;
         }
     }
 }
 
-final cssclass(cssclass) = {
+cssclass(cssclass) = {
     return new {
         cssclass |= str;
         \call(dom) = {
@@ -63,7 +60,7 @@ final cssclass(cssclass) = {
     }
 }
 
-final style(style) = {
+style(style) = {
     return new {
         style |= str;
         \call(dom) = {

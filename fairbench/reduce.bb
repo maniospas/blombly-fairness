@@ -10,7 +10,7 @@ final reduce = new {
 
 reduce.min(args) = {
     best = args[0];
-    while(i as loop::range(1, len(args)))
+    while(i as next(!of range(1, args|len)))
         if(args[i] < best)
             best = args[i];
     return new {
@@ -24,7 +24,7 @@ reduce.min(args) = {
 
 reduce.max(args) = {
     best = args[0];
-    while(i as loop::range(1, len(args)))
+    while(i as next(!of range(1, args|len)))
         if(args[i] > best)
             best = args[i];
     return new {
@@ -40,7 +40,7 @@ reduce.std(args) = {
     mean = sum(args) / len(args);
     squares = 0;
     sums = 0;
-    while(x as loop::next(args)) {
+    while(x as next(!of args|iter)) {
         squares += (x - mean)^2;
         sums += x;
     }
@@ -61,7 +61,7 @@ reduce.gini(args) = {
     n = len(sorted_args);
     cumulative_sum = 0;
     total_sum = sum(sorted_args);
-    while(i as loop::range(n))
+    while(i as next(!of n|range))
         cumulative_sum += (i + 1) * sorted_args[i];
     gini = (2 * cumulative_sum) / (n * total_sum) - (n + 1) / n;
     return new {

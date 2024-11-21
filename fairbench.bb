@@ -1,4 +1,3 @@
-#include "libs/loop"
 #include "libs/html"
 #include "fairbench/metrics"
 #include "fairbench/reduce"
@@ -17,25 +16,25 @@ preds  = (1,0,1,0,1,0,1,0,1,0)|vector;
 labels = (1,1,0,1,0,0,0,1,1,1)|vector;
 men    = (1,1,0,0,1,0,1,1,0,0)|vector;
 women  = 1-men;
-sensitive = new{fork: sensitive=men,women}
+sensitive = new {fork: sensitive=men,women}
 
 
 create_page = {
     // create results table
     results = "table"|dom|cssclass("table");
     results_body = "tbody"|dom;
-    results and= results_body;
+    results += results_body;
 
     // fill results table body
-    while(config as loop::next(configs)) {
+    while(config as next(!of configs|iter)) {
         value = sensitive(config: preds=preds; labels=labels);
         //print("{value|left} | {value|bar}");
-        results_body and= ("tr"|dom) and ("td"|dom and value.name|str) and ("td"|dom and value|float);
+        results_body += ("tr"|dom) + ("td"|dom + value.name|str) + ("td"|dom + value|float);
     }
 
     // centering div
     center = "div"|dom|cssclass("container d-flex justify-content-center");
-    center and= results;
+    center += results;
 
     src = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js";
     stylesheet = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css";
