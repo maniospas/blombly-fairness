@@ -1,5 +1,5 @@
 final fork = {
-    final \str = {return "A fork of {len(this.sensitive)} sensitive attributes"}
+    final \str = {return "A fork of {this.sensitive|len} sensitive attributes"}
     final \call = {
         ret = list();
         while(sens as next(!of this.sensitive|iter)) {

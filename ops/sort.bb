@@ -1,7 +1,7 @@
 final sort(args) = {
     sorted_args = args;
-    while(i as next(!of range(sorted_args|len-1))) {
-        while(j as next(!of range(i + 1, sorted_args|len)))
+    while(i in range(sorted_args|len-1)) {
+        while(j in range(i + 1, sorted_args|len))
             if(sorted_args[i] > sorted_args[j]) {
                 temp = sorted_args[i];
                 sorted_args[i] = sorted_args[j];

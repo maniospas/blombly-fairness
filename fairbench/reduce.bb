@@ -1,16 +1,17 @@
-#include "fairbench/utils"
-#include "ops/sort"
+!include "fairbench/utils"
+!include "ops/sort"
 
 
 final reduce = new {
     final explainable = explainable;
     final sort = sort;
+    final range1(n) = {return range(1,n|int)}
 }
 
 
 reduce.min(args) = {
     best = args[0];
-    while(i as next(!of range(1, args|len)))
+    while(i in args|len|range1)
         if(args[i] < best)
             best = args[i];
     return new {
@@ -24,7 +25,7 @@ reduce.min(args) = {
 
 reduce.max(args) = {
     best = args[0];
-    while(i as next(!of range(1, args|len)))
+    while(i in args|len|range1)
         if(args[i] > best)
             best = args[i];
     return new {
@@ -40,7 +41,7 @@ reduce.std(args) = {
     mean = sum(args) / len(args);
     squares = 0;
     sums = 0;
-    while(x as next(!of args|iter)) {
+    while(x in args) {
         squares += (x - mean)^2;
         sums += x;
     }
@@ -61,7 +62,7 @@ reduce.gini(args) = {
     n = len(sorted_args);
     cumulative_sum = 0;
     total_sum = sum(sorted_args);
-    while(i as next(!of n|range))
+    while(i in n|range)
         cumulative_sum += (i + 1) * sorted_args[i];
     gini = (2 * cumulative_sum) / (n * total_sum) - (n + 1) / n;
     return new {

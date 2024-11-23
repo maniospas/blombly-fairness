@@ -2,7 +2,7 @@ final bar(value) = {
     value |= float;
     value = int(value*10);
     ret = "";
-    while(i as next(!of value|range|iter))
+    while(i in value|range)
         ret = ret + "■";
     return ret;
 }
@@ -10,7 +10,7 @@ final bar(value) = {
 final left(value) = {
     default size = 20;
     ret = value|str;
-    while(i as next(!of range(ret|len, size)))
+    while(i in range(ret|len, size))
         ret = ret + " ";
     return ret;
 }

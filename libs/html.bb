@@ -27,7 +27,7 @@ dom(name) = {
         \str = {
             // combine contents
             contents = "";
-            while(element as next(!of this.contents|iter))
+            while(element in this.contents)
                 contents = contents + element|str;
             // additional element values
             preample = "";
